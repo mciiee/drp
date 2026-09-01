@@ -2,14 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <errno.h>
 
 
+#include <getopt.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
 
 #include "log.h"
+#include "cliopts.h"
+
 
 #define HELPER_DEFAULT_OPTION(option) " (default: " option ")"
 
@@ -27,12 +31,6 @@
 #endif
 
 
-struct CliOptions {
-  char *ifname;
-  char *configFilePath;
-  uint16_t port;
-  bool help;
-};
 
 constexpr char CLI_OPTIONS_TEMPLATE[] = {
   "Usage: %s [OPTIONS]" "\n"
