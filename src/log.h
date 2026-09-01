@@ -1,5 +1,6 @@
 #ifndef LOG_H
 #define LOG_H
+#include <stdio.h>
 
 #ifndef ERROR_PREFIX
 #define ERROR_PREFIX "[ERROR] "
