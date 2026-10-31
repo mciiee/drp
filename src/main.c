@@ -16,6 +16,7 @@
 #include "log.h"
 #include "cliopts.h"
 #include "listener.h"
+#include "config.h"
 
 #define HELPER_DEFAULT_OPTION(option) " (default: " option ")"
 
@@ -111,7 +112,13 @@ int main(int argc, char *argv[argc]) {
     return EXIT_SUCCESS;
   }
 
-  int sockfd = drp_server_start("lo", INADDR_ANY, 5353, 1);
+  err = drp_config_load(cliOptions.configFilePath);
+  if (err < 0) {
+    LOG_ERROR("Failed to load config\n");
+    return EXIT_FAILURE;
+  }
+
+  int sockfd = drp_server_start("lo", INADDR_ANY, 5353);
   if (sockfd < 0) {
     return EXIT_FAILURE;
   }
